@@ -1,1 +1,1 @@
-# Login Authentications using PassportJs with Facebook, Amazon ... oath
+# Login Authentication with Facebook, Amazon, Github, Instagram, Spotify using PassportJs 
