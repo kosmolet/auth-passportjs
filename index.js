@@ -25,7 +25,6 @@ const {
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CLIENT_SECRET,
 } = process.env;
-
 let user = {};
 
 passport.serializeUser((user, cb) => {
@@ -58,10 +57,6 @@ passport.use(
       callbackURL: "/auth/amazon/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      // User.findOrCreate({ amazonId: profile.id }, function (err, user) {
-      //   return done(err, user);
-      // });
-      console.log(profile);
       user = { ...profile };
       return done(null, profile);
     }

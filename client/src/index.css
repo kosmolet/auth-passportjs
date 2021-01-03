@@ -5,4 +5,160 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #292727;
+  background-color: #ebe5e5;
+}
+
+.home-page {
+  margin: 0 auto;
+  text-align: "center";
+}
+
+.home-content {
+  font-weight: 400;
+  font-size: 35px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  justify-content: center;
+  align-content: center;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-icon {
+  width: 15px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.btn-txt {
+  padding-left: 10px;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.menu-btn {
+  padding: 12px 15px;
+  display: inline-block;
+}
+
+.menu-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.login-btn {
+  padding: 15px 20px;
+  border-radius: 3px;
+}
+
+.menu-bar {
+  overflow: hidden;
+  background-color: black;
+  box-shadow: -5px -7px 15px 1px rgba(0, 0, 0, 0.8);
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.app-icon-container {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 1.5rem;
+  border-radius: 50%;
+}
+
+/* logo cards */
+.card {
+  background: white;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 2em;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  transition: all ease-in-out 0.6s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* user data */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-page-title {
+  font-size: 35px;
+}
+.user-data-wr {
+  width: 60vw;
+  margin: 0 auto;
+}
+
+.user-data-title {
+  background-color: white;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  padding: 3px;
+}
+
+.buttons-small {
+  padding-left: 8px;
+  padding-top: 3px;
+}
+
+.content {
+  background-color: #e0d9d9;
+  padding: 10px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  word-wrap: break-word;
+  white-space: wrap;
+}
+.content pre {
+  white-space: pre-wrap;
+}
+.data-tags {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.tag {
+  color: black;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px 5px 20px 5px;
+}
+
+.tag:hover,
+.selected {
+  background-color: black;
+  color: white;
 }
