@@ -1,3 +1,4 @@
+const { connectDB } = require("./config/database");
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
@@ -9,115 +10,7 @@ const InstagramStrategy = require("passport-instagram").Strategy;
 const SpotifyStrategy = require("passport-spotify").Strategy;
 
 require("dotenv").config();
-const {
-  PORT,
-  BASE_URL,
-  AMAZON_CLIENT_ID,
-  AMAZON_CLIENT_SECRET,
-  FACEBOOK_CLIENT_ID,
-  FACEBOOK_CLIENT_SECRET,
-  GITHUB_CLIENT_ID,
-  GITHUB_CLIENT_SECRET,
-  GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
-  INSTAGRAM_CLIENT_ID,
-  INSTAGRAM_CLIENT_SECRET,
-  SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET,
-} = process.env;
-let user = {};
-
-passport.serializeUser((user, cb) => {
-  cb(null, user);
-});
-
-passport.deserializeUser((user, cb) => {
-  cb(null, user);
-});
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: FACEBOOK_CLIENT_ID,
-      clientSecret: FACEBOOK_CLIENT_SECRET,
-      callbackURL: `/auth/facebook/callback`,
-    },
-    (accessToken, refreshToken, profile, done) => {
-      user = { ...profile };
-      return done(null, profile);
-    }
-  )
-);
-
-passport.use(
-  new AmazonStrategy(
-    {
-      clientID: AMAZON_CLIENT_ID,
-      clientSecret: AMAZON_CLIENT_SECRET,
-      callbackURL: "/auth/amazon/callback",
-    },
-    (accessToken, refreshToken, profile, done) => {
-      user = { ...profile };
-      return done(null, profile);
-    }
-  )
-);
-
-passport.use(
-  new GithubStrategy(
-    {
-      clientID: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "/auth/github/callback",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      user = { ...profile };
-      return cb(null, profile);
-    }
-  )
-);
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      user = { ...profile };
-      return cb(null, profile);
-    }
-  )
-);
-
-passport.use(
-  new InstagramStrategy(
-    {
-      clientID: INSTAGRAM_CLIENT_ID,
-      clientSecret: INSTAGRAM_CLIENT_SECRET,
-      callbackURL: "/auth/instagram/callback",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      user = { ...profile };
-      return cb(null, profile);
-    }
-  )
-);
-
-passport.use(
-  new SpotifyStrategy(
-    {
-      clientID: SPOTIFY_CLIENT_ID,
-      clientSecret: SPOTIFY_CLIENT_SECRET,
-      callbackURL: "/auth/spotify/callback",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      user = { ...profile };
-      return cb(null, profile);
-    }
-  )
-);
+const { PORT, BASE_URL } = process.env;
 
 const app = express();
 app.use(cors());
@@ -205,12 +98,8 @@ app.get("/", (req, res) => {
 
 const start = async () => {
   try {
-    //   await mongoose.connect(MONGO_URI, {
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true,
-    //     useCreateIndex: true,
-    //   });
-    app.listen(PORT || 5055, () =>
+    connectDB();
+    app.listen(PORT || 5070, () =>
       console.log(`Server is running on http://localhost:${PORT}`)
     );
   } catch (err) {
