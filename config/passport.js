@@ -1,12 +1,6 @@
 const passport = require("passport");
-const TwitterStrategy = require("passport-twitter").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
-const AmazonStrategy = require("passport-amazon").Strategy;
-const GithubStrategy = require("passport-github").Strategy;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const InstagramStrategy = require("passport-instagram").Strategy;
-const SpotifyStrategy = require("passport-spotify").Strategy;
-const User = require("../models/User");
+require("dotenv").config();
+
 const {
   TWITTER_CONSUMER_KEY,
   TWITTER_CONSUMER_SECRET,
@@ -23,6 +17,15 @@ const {
   SPOTIFY_CLIENT_ID,
   SPOTIFY_CLIENT_SECRET,
 } = process.env;
+
+const TwitterStrategy = require("passport-twitter").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const AmazonStrategy = require("passport-amazon").Strategy;
+const GithubStrategy = require("passport-github").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const InstagramStrategy = require("passport-instagram").Strategy;
+const SpotifyStrategy = require("passport-spotify").Strategy;
+const User = require("../models/User");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -45,7 +48,7 @@ passport.use(
     {
       consumerKey: TWITTER_CONSUMER_KEY,
       consumerSecret: TWITTER_CONSUMER_SECRET,
-      callbackURL: "/auth/twitter/callback",
+      callbackURL: "/auth/twitter/redirect",
     },
     async (token, tokenSecret, profile, done) => {
       const currentUser = await User.findOne({

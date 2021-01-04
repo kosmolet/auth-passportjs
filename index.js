@@ -1,98 +1,48 @@
+const cookieSession = require("cookie-session");
 const { connectDB } = require("./config/database");
 const express = require("express");
-const cors = require("cors");
 const passport = require("passport");
-const FacebookStrategy = require("passport-facebook").Strategy;
-const AmazonStrategy = require("passport-amazon").Strategy;
-const GithubStrategy = require("passport-github").Strategy;
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const InstagramStrategy = require("passport-instagram").Strategy;
-const SpotifyStrategy = require("passport-spotify").Strategy;
-
+const passportConfig = require("./config/passport");
+const session = require("express-session");
+const auth = require("./middleware/auth.middleware");
+const authRoutes = require("./routes/auth");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const { PORT, BASE_URL } = process.env;
+const { PORT, BASE_URL, COOKIE_KEY } = process.env;
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [COOKIE_KEY],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+
+app.use(cookieParser());
+
 app.use(passport.initialize());
 
-app.get("/auth/facebook", passport.authenticate("facebook"));
-app.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
-);
+app.use(passport.session());
 
-app.get(
-  "/auth/amazon",
-  passport.authenticate("amazon", {
-    scope: ["profile"],
-  })
-);
-app.get(
-  "/auth/amazon/callback",
-  passport.authenticate("amazon"),
-  (req, res) => {
-    res.redirect("http://localhost:3000/profile");
-  }
-);
-
-app.get("/auth/github", passport.authenticate("github"));
-app.get(
-  "/auth/github/callback",
-  passport.authenticate("github"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
-);
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
+app.use(
+  cors({
+    origin: BASE_URL,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
   })
 );
 
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
-);
+app.use("/auth", require("./routes/auth"));
 
-app.get("/auth/instagram", passport.authenticate("instagram"));
-app.get(
-  "/auth/instagram/callback",
-  passport.authenticate("instagram"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
-);
-
-app.get("/auth/spotify", passport.authenticate("spotify"));
-app.get(
-  "/auth/spotify/callback",
-  passport.authenticate("spotify"),
-  (req, res) => {
-    res.redirect("http://localhost:3000/profile");
-  }
-);
-
-app.get("/user", (req, res) => {
-  res.send(user);
-});
-
-app.get("/auth/logout", (req, res) => {
-  user = {};
-  res.redirect("/");
-});
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "api works",
+app.get("/", auth, (req, res) => {
+  res.status(200).json({
+    authenticated: true,
+    message: "user successfully authenticated",
+    user: req.user,
+    cookies: req.cookies,
   });
 });
 
