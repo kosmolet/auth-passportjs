@@ -53,54 +53,41 @@ router.get(
   })
 );
 
-//
-// app.get(
-//   "/auth/facebook/callback",
-//   passport.authenticate("facebook"),
-//   (req, res) => {
-//     res.redirect("/profile");
-//   }
-// );
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook"),
+  (req, res) => {
+    res.redirect("/profile");
+  }
+);
 
-// app.get(
-//   "/auth/amazon/callback",
-//   passport.authenticate("amazon"),
-//   (req, res) => {
-//     res.redirect("http://localhost:3000/profile");
-//   }
-// );
+router.get("/amazon/callback", passport.authenticate("amazon"), (req, res) => {
+  res.redirect("http://localhost:3000/profile");
+});
 
-// app.get(
-//   "/auth/github/callback",
-//   passport.authenticate("github"),
-//   (req, res) => {
-//     res.redirect("/profile");
-//   }
-// );
+router.get("/github/callback", passport.authenticate("github"), (req, res) => {
+  res.redirect("/profile");
+});
 
-// app.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google"),
-//   (req, res) => {
-//     res.redirect("/profile");
-//   }
-// );
+router.get("/google/callback", passport.authenticate("google"), (req, res) => {
+  res.redirect("/profile");
+});
 
-// app.get(
-//   "/auth/instagram/callback",
-//   passport.authenticate("instagram"),
-//   (req, res) => {
-//     res.redirect("/profile");
-//   }
-// );
+router.get(
+  "/instagram/callback",
+  passport.authenticate("instagram"),
+  (req, res) => {
+    res.redirect("/profile");
+  }
+);
 
-// app.get(
-//   "/auth/spotify/callback",
-//   passport.authenticate("spotify"),
-//   (req, res) => {
-//     res.redirect("http://localhost:3000/profile");
-//   }
-// );
+router.get(
+  "/spotify/callback",
+  passport.authenticate("spotify"),
+  (req, res) => {
+    res.redirect("http://localhost:3000/profile");
+  }
+);
 
 // app.get("/user", (req, res) => {
 //   res.send(user);
