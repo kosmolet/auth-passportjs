@@ -4,6 +4,7 @@ import GithubIcon from "../assets/images/github.png";
 import GoogleIcon from "../assets/images/google.png";
 import InstagramIcon from "../assets/images/instagram.png";
 import SpotifyIcon from "../assets/images/spotify.png";
+import TwitterIcon from "../assets/images/twitter.png";
 
 export const data = [
   {
@@ -57,5 +58,13 @@ export const data = [
     alt: "spotify-icon",
     color: "#1EB954",
     txt: "Login with Spotify",
+  },
+  {
+    img: TwitterIcon,
+    name: "twitter",
+    href: "auth/twitter",
+    alt: "twitter-icon",
+    color: "#1da1f2",
+    txt: "Login with Twitter",
   },
 ];

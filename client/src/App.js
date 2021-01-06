@@ -10,10 +10,10 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        {/* <Route path="/" component={MenuBar} />
-        <Route path="/profile" component={Profile} />
+        {/* <Route path="/" component={MenuBar} /> */}
+        {/* <Route path="/profile" component={Profile} />
 
-        <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" component={Home} />   */}
         <Route exact path="/" component={Homepage} />
       </Router>
     </UserProvider>

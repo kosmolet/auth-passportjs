@@ -54,48 +54,49 @@ router.get(
 );
 
 router.get(
-  "/facebook/callback",
-  passport.authenticate("facebook"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
-);
-
-router.get("/amazon/callback", passport.authenticate("amazon"), (req, res) => {
-  res.redirect("http://localhost:3000/profile");
-});
-
-router.get("/github/callback", passport.authenticate("github"), (req, res) => {
-  res.redirect("/profile");
-});
-
-router.get("/google/callback", passport.authenticate("google"), (req, res) => {
-  res.redirect("/profile");
-});
-
-router.get(
-  "/instagram/callback",
-  passport.authenticate("instagram"),
-  (req, res) => {
-    res.redirect("/profile");
-  }
+  "/facebook/redirect",
+  passport.authenticate("facebook", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
 );
 
 router.get(
-  "/spotify/callback",
-  passport.authenticate("spotify"),
-  (req, res) => {
-    res.redirect("http://localhost:3000/profile");
-  }
+  "/amazon/redirect",
+  passport.authenticate("amazon", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
 );
 
-// app.get("/user", (req, res) => {
-//   res.send(user);
-// });
+router.get(
+  "/github/redirect",
+  passport.authenticate("github", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
+);
+router.get(
+  "/google/redirect",
+  passport.authenticate("google", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
+);
+router.get(
+  "/instagram/redirect",
+  passport.authenticate("instagram", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
+);
 
-// app.get("/auth/logout", (req, res) => {
-//   user = {};
-//   res.redirect("/");
-// });
+router.get(
+  "/spotify/redirect",
+  passport.authenticate("spotify", {
+    successRedirect: BASE_URL,
+    failureRedirect: "/auth/login/failed",
+  })
+);
 
 module.exports = router;

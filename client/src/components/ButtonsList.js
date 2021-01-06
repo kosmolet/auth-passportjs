@@ -1,7 +1,6 @@
 import React from "react";
 // import Card from "./Card";
 import Button from "./Button";
-
 import { data } from "../data/index";
 
 const ButtonsList = () => {

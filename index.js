@@ -5,7 +5,6 @@ const passport = require("passport");
 const passportConfig = require("./config/passport");
 const session = require("express-session");
 const auth = require("./middleware/auth.middleware");
-const authRoutes = require("./routes/auth");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
