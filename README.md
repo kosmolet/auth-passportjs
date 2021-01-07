@@ -1,5 +1,5 @@
 ##  Authentication using Passport.js  
-Server with **Express, NodeJs**  
+Server with **Express, Node.js**  
 Storing Data in **MongoDB**  
 Frontend with **React**   
 
@@ -63,6 +63,14 @@ Once screen is created navigate to **Credentials**->**Edit/Create** and add **UR
 Copy `Client ID` and `Client Secret` and add to the `.env` file:    
 `GOOGLE_CLIENT_ID=Client ID`  
 `GOOGLE_CLIENT_ID=Client Secret`
+
+#### Authentication with [Instagram](http://www.passportjs.org/packages/passport-instagram/)      
+Create [new application](https://developers.facebook.com/apps/) in the Facebook developer account   
+Once app is created navigate to **Products**->**Add Instagram** and add **OAuth Redirect URIs**(only https are accepted)  
+Test users can be added in User Token Generator->Instagram Testers to generate long-lived access tokens   
+Copy `Client ID` and `Client Secret` and add to the `.env` file:    
+`INSTAGRAM_CLIENT_ID=Instagram App ID`  
+`INSTAGRAM_CLIENT_SECRET=Instagram App Secret`
 
 
 ### Start
