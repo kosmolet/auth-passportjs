@@ -22,7 +22,15 @@ Enable **Request email address from users**options and Save settings.
 Also `includeEmail: true` should be included in the `passport.use( new TwitterStrategy( {} )` in the `passport.js` config file (done) in order to receive user’s email in the response-profile  
 Once [app](https://developer.twitter.com/en/portal/apps/) is created navigate to the **Keys and tokens** on app details and click `View Keys`. Copy `API key` and `API key secret` and add them to the `.env` file in root directory of the project:   
 `TWITTER_CONSUMER_KEY=API key`   
-`TWITTER_CONSUMER_SECRET=API key secret`  
+`TWITTER_CONSUMER_SECRET=API key secret`    
+
+#### Authentication with Facebook [FacebookStrategy](http://www.passportjs.org/packages/passport-facebook/)     
+Create [new application](https://developers.facebook.com/apps/) in the facebook developer account  
+Once app is created navigate to the app dashboard, and find **Facebook Login** product. Click *Set Up*, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product.    
+In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and `App Secret` and add them to the `.env` file:   
+`FACEBOOK_CLIENT_ID=App ID`  
+`FACEBOOK_CLIENT_SECRET=App Secret`  
+
 
 
 #### Start
