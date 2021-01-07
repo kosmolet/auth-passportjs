@@ -24,10 +24,11 @@ Once [app](https://developer.twitter.com/en/portal/apps/) is created navigate to
 `TWITTER_CONSUMER_KEY=API key`   
 `TWITTER_CONSUMER_SECRET=API key secret`    
 
-#### Authentication with Facebook [FacebookStrategy](http://www.passportjs.org/packages/passport-facebook/)     
-Create [new application](https://developers.facebook.com/apps/) in the facebook developer account  
-Once app is created navigate to the app dashboard, and find **Facebook Login** product. Click *Set Up*, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product.    
-In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and `App Secret` and add them to the `.env` file:   
+#### Authentication with Facebook [FacebookStrategy](http://www.passportjs.org/packages/passport-facebook/)      
+Create [new application](https://developers.facebook.com/apps/) in the facebook developer account   
+Once app is created navigate to the app dashboard, and find **Facebook Login** product.  
+Click **Set Up**, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product.     
+In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and `App Secret` and add them to the `.env` file:    
 `FACEBOOK_CLIENT_ID=App ID`  
 `FACEBOOK_CLIENT_SECRET=App Secret`  
 
