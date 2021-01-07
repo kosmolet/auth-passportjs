@@ -44,7 +44,14 @@ Create [new application](https://developer.amazon.com/loginwithamazon/console/si
 Once app is created navigate to **Security Profile**->**Web Settings** and add **Allowed Origins**(base URL) and **Allowed Return URLs**: `http://localhost:5070/auth/amazon/redirect`  
 Copy `Client ID` and `Client Secret` and add to the `.env` file:    
 `AMAZON_CLIENT_ID=Client ID`  
-`AMAZON_CLIENT_SECRET=Client Secret`  
+`AMAZON_CLIENT_SECRET=Client Secret` 
+
+#### Authentication with [Spotify](http://www.passportjs.org/packages/passport-spotify/)      
+Create [new application](https://developer.spotify.com/dashboard/applications) in the Spotify developer account   
+Once app is created navigate to **App details**->**Edit Settings** and add **Website**(base URL) and **Redirect URIs**: `http://localhost:5070/auth/spotify/redirect`  
+Copy `Client ID` and `Client Secret` and add to the `.env` file:    
+`SPOTIFY_CLIENT_ID=Client ID`  
+`SPOTIFY_CLIENT_SECRET=Client Secret`
 
 
 #### Start
