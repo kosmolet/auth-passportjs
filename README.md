@@ -32,6 +32,12 @@ In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and 
 `FACEBOOK_CLIENT_ID=App ID`  
 `FACEBOOK_CLIENT_SECRET=App Secret`  
 
+#### Authentication with GitHub [GitHub Strategy](http://www.passportjs.org/packages/passport-github/)    
+Navigate to [github](https://github.com/settings/developers) in the **Settings / Developer settings** click `New OAuth App`    
+ Register a new OAuth application: enter your base URL in the *Homepage URL* field and add *Authorization callback URL* , it should correspond to the route where the users will be redirected after they logged in, for example: `http://localhost:5070/auth/github/redirect`  
+Once the app is created click `Generate client secret` in App Details and copy `Client ID` and `Client secret` and add them to the `.env` file:   
+`GITHUB_CLIENT_ID=Client ID`  
+`GITHUB_CLIENT_SECRET=Client secret`  
 
 
 #### Start
