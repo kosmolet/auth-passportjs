@@ -27,7 +27,7 @@ Once [app](https://developer.twitter.com/en/portal/apps/) is created navigate to
 #### Authentication with [Facebook](http://www.passportjs.org/packages/passport-facebook/)      
 Create [new application](https://developers.facebook.com/apps/) in the facebook developer account   
 Once app is created navigate to the app dashboard, and find **Facebook Login** product.  
-Click **Set Up**, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product.     
+Click **Set Up**, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product. Redirect URLs should be added for production website, localhost redirects works by default       
 In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and `App Secret` and add them to the `.env` file:    
 `FACEBOOK_CLIENT_ID=App ID`  
 `FACEBOOK_CLIENT_SECRET=App Secret`  
@@ -53,6 +53,14 @@ Copy `Client ID` and `Client Secret` and add to the `.env` file:
 `SPOTIFY_CLIENT_ID=Client ID`  
 `SPOTIFY_CLIENT_SECRET=Client Secret`
 
+#### Authentication with [Google](http://www.passportjs.org/packages/passport-google-oauth20/)      
+[Create](https://developers.google.com/adwords/api/docs/guides/authentication#create_a_client_id_and_client_secret) a [project](https://console.developers.google.com/) in the Google developer console.  
+Navigate to [APIs & Services](https://console.developers.google.com/apis/dashboard) tab. Create [OAuth consent screen](https://console.developers.google.com/apis/credentials/consent)     
+Once screen is created navigate to **Credentials**->**Edit/Create** and add **URIs**(base URL) and **Authorized redirect URIs**: `http://localhost:5070/auth/google/redirect`  
+Copy `Client ID` and `Client Secret` and add to the `.env` file:    
+`GOOGLE_CLIENT_ID=Client ID`  
+`GOOGLE_CLIENT_ID=Client Secret`
+
 
 #### Start
 Install dependencies for server `npm i` in root/server folder     
@@ -60,6 +68,6 @@ Install dependencies for client `cd client` `npm i`
 Start server and client concurrently: by navigating to server directory `cd ..` and running `npm run dev` command   
 
 
-![login](https://res.cloudinary.com/dnkftif1n/image/upload/v1609651095/projectsGitHUB/login%20passport/2021-01-03_5-43-30_wqqsuz.png)  
-![auth](https://res.cloudinary.com/dnkftif1n/image/upload/v1609651080/projectsGitHUB/login%20passport/sgn_vrn0o0.png)  
-![redirect](https://res.cloudinary.com/dnkftif1n/image/upload/v1609651080/projectsGitHUB/login%20passport/user_info_xqn5sz.png)  
+![login](https://res.cloudinary.com/dnkftif1n/image/upload/v1610051827/projectsGitHUB/login%20passport/1_dv7pra.png)  
+ 
+![redirect](https://res.cloudinary.com/dnkftif1n/image/upload/v1610051843/projectsGitHUB/login%20passport/2_fiznvn.png)  
