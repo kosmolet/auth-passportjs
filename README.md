@@ -13,7 +13,7 @@ Add applications in your developer accounts on Google, Twitter, Facebook, GitHub
 Create application inside of each developer account, add Redirection/Callback URLs which correspond to the server routes  
 Copy Client(app) ID and SECRET and add them to `.env` file in the root directory of the project
 
-#### Authentication with Twitter [TwitterStrategy](http://www.passportjs.org/packages/passport-twitter/)  
+#### Authentication with [Twitter](http://www.passportjs.org/packages/passport-twitter/)  
 Create [new application](https://developer.twitter.com/en/portal/apps/new) in the twitter developer account  
 Navigate to **App Details**->**Authentication settings**->**Edit**  
 Make active  **Enable 3-legged OAuth** option and add **Callback URLs** it should correspond to the routes where the users will be redirected after they logged in, for example: `http://localhost:5070/auth/twitter/redirect`  
@@ -24,7 +24,7 @@ Once [app](https://developer.twitter.com/en/portal/apps/) is created navigate to
 `TWITTER_CONSUMER_KEY=API key`   
 `TWITTER_CONSUMER_SECRET=API key secret`    
 
-#### Authentication with Facebook [FacebookStrategy](http://www.passportjs.org/packages/passport-facebook/)      
+#### Authentication with [Facebook](http://www.passportjs.org/packages/passport-facebook/)      
 Create [new application](https://developers.facebook.com/apps/) in the facebook developer account   
 Once app is created navigate to the app dashboard, and find **Facebook Login** product.  
 Click **Set Up**, and then on the subsequent screen, click **Web**. Enter your base URL in the **Site URL** and complete adding the product.     
@@ -32,12 +32,19 @@ In the left-hand side menu bar select **Settings->Basic** and copy `App ID` and 
 `FACEBOOK_CLIENT_ID=App ID`  
 `FACEBOOK_CLIENT_SECRET=App Secret`  
 
-#### Authentication with GitHub [GitHub Strategy](http://www.passportjs.org/packages/passport-github/)    
+#### Authentication with [GitHub](http://www.passportjs.org/packages/passport-github/)    
 Navigate to [github](https://github.com/settings/developers) in the **Settings / Developer settings** click `New OAuth App`    
  Register a new OAuth application: enter your base URL in the *Homepage URL* field and add *Authorization callback URL* , it should correspond to the route where the users will be redirected after they logged in, for example: `http://localhost:5070/auth/github/redirect`  
 Once the app is created click `Generate client secret` in App Details and copy `Client ID` and `Client secret` and add them to the `.env` file:   
 `GITHUB_CLIENT_ID=Client ID`  
 `GITHUB_CLIENT_SECRET=Client secret`  
+
+#### Authentication with [Amazon](http://www.passportjs.org/packages/passport-amazon/)      
+Create [new application](https://developer.amazon.com/loginwithamazon/console/site/lwa/overview.html) in the Amazon developer account   
+Once app is created navigate to **Security Profile**->**Web Settings** and add **Allowed Origins**(base URL) and **Allowed Return URLs**: `http://localhost:5070/auth/amazon/redirect`  
+Copy `Client ID` and `Client Secret` and add to the `.env` file:    
+`AMAZON_CLIENT_ID=Client ID`  
+`AMAZON_CLIENT_SECRET=Client Secret`  
 
 
 #### Start
