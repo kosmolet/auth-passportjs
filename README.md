@@ -1,6 +1,9 @@
-##  Authentication using Passport.js   
+##  Authentication using Passport.js  
+Server with **Express**  
+Storing Data in **MongoDB**  
+Frontend with **React**   
 
-#### Setup  
+### Setup  
 
 Create `.env` file in the root directory of the project and add: 
 `PORT=5070`    
@@ -62,7 +65,7 @@ Copy `Client ID` and `Client Secret` and add to the `.env` file:
 `GOOGLE_CLIENT_ID=Client Secret`
 
 
-#### Start
+### Start
 Install dependencies for server `npm i` in root/server folder     
 Install dependencies for client `cd client` `npm i`   
 Start server and client concurrently: by navigating to server directory `cd ..` and running `npm run dev` command   
