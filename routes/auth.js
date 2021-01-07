@@ -27,21 +27,31 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/twitter", passport.authenticate("twitter"));
-router.get("/facebook", passport.authenticate("facebook"));
+router.get(
+  "/facebook",
+  passport.authenticate("facebook", {
+    scope: ["public_profile", "email"],
+  })
+);
 router.get("/github", passport.authenticate("github"));
 router.get("/instagram", passport.authenticate("instagram"));
-router.get("/spotify", passport.authenticate("spotify"));
+router.get(
+  "/spotify",
+  passport.authenticate("spotify", {
+    scope: ["user-read-email", "user-read-private"],
+  })
+);
 router.get(
   "/amazon",
   passport.authenticate("amazon", {
-    scope: ["profile"],
+    scope: ["profile", "postal_code"],
   })
 );
 
 router.get(
   "/google",
   passport.authenticate("google", {
-    scope: ["profile", "email"],
+    scope: ["email", "profile"],
   })
 );
 
@@ -83,17 +93,18 @@ router.get(
     failureRedirect: "/auth/login/failed",
   })
 );
+
 router.get(
-  "/instagram/redirect",
-  passport.authenticate("instagram", {
+  "/spotify/redirect",
+  passport.authenticate("spotify", {
     successRedirect: BASE_URL,
     failureRedirect: "/auth/login/failed",
   })
 );
 
 router.get(
-  "/spotify/redirect",
-  passport.authenticate("spotify", {
+  "/instagram/redirect",
+  passport.authenticate("instagram", {
     successRedirect: BASE_URL,
     failureRedirect: "/auth/login/failed",
   })

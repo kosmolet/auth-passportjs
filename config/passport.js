@@ -27,12 +27,10 @@ const SpotifyStrategy = require("passport-spotify").Strategy;
 const User = require("../models/User");
 
 passport.serializeUser((user, done) => {
-  console.log("USER Serialize", user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  console.log("USER ID Deserializate", id);
   try {
     const user = await User.findById(id);
     done(null, user);
@@ -47,19 +45,21 @@ passport.use(
       consumerKey: TWITTER_CONSUMER_KEY,
       consumerSecret: TWITTER_CONSUMER_SECRET,
       callbackURL: "/auth/twitter/redirect",
+      includeEmail: true,
     },
-    async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE", profile);
+    async (req, token, tokenSecret, profile, done) => {
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
           name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
+          email: profile._json.email,
+          image: profile._json.profile_image_url_https,
+          location: profile._json.location,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {
@@ -70,22 +70,6 @@ passport.use(
     }
   )
 );
-
-// TO DO save user to db
-
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: FACEBOOK_CLIENT_ID,
-//       clientSecret: FACEBOOK_CLIENT_SECRET,
-//       callbackURL: `/auth/facebook/callback`,
-//     },
-//     (accessToken, refreshToken, profile, done) => {
-//       user = { ...profile };
-//       return done(null, profile);
-//     }
-//   )
-// );
 
 passport.use(
   new FacebookStrategy(
@@ -93,49 +77,29 @@ passport.use(
       clientID: FACEBOOK_CLIENT_ID,
       clientSecret: FACEBOOK_CLIENT_SECRET,
       callbackURL: "/auth/facebook/redirect",
+      profileFields: [
+        "id",
+        "displayName",
+        "email",
+        "name",
+        "photos",
+        "gender",
+        "birthday",
+      ],
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_FB", profile);
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
           name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
-          profile,
-        }).save();
-        if (newUser) {
-          done(null, newUser);
-        }
-      }
-      done(null, currentUser);
-    }
-  )
-);
-
-passport.use(
-  new InstagramStrategy(
-    {
-      clientID: INSTAGRAM_CLIENT_ID,
-      clientSecret: INSTAGRAM_CLIENT_SECRET,
-      callbackURL: "/auth/instagram/redirect",
-    },
-    async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_INSTA", profile);
-      const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
-      });
-
-      if (!currentUser) {
-        const newUser = await new User({
-          name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
+          email: profile._json.email,
+          image: profile._json.picture.data.url,
+          birthday: profile._json.birthday,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {
@@ -155,17 +119,51 @@ passport.use(
       callbackURL: "/auth/github/redirect",
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_github", profile);
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
-          name: profile._json.login,
-          authByProvider: profile.provider,
-          providerId: profile._json.id,
-          screenName: profile.profileUrl,
+          name: profile.username,
+          email: profile._json.email,
+          image: profile._json.avatar_url,
+          location: profile._json.location,
+          provider: profile.provider,
+          providerId: profile.id,
+          profile,
+        }).save();
+        if (newUser) {
+          done(null, newUser);
+        }
+      }
+      done(null, currentUser);
+    }
+  )
+);
+
+passport.use(
+  new InstagramStrategy(
+    {
+      clientID: INSTAGRAM_CLIENT_ID,
+      clientSecret: INSTAGRAM_CLIENT_SECRET,
+      callbackURL: "/auth/instagram/redirect",
+      passReqToCallback: true,
+    },
+    async (req, token, tokenSecret, profile, done) => {
+      const currentUser = await User.findOne({
+        providerId: profile.id,
+      });
+
+      if (!currentUser) {
+        const newUser = await new User({
+          name: profile._json.name,
+          email: profile._json.email,
+          image: profile._json.picture.data.url,
+          birthday: profile._json.birthday,
+          location: profile._json.location,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {
@@ -185,17 +183,17 @@ passport.use(
       callbackURL: "/auth/spotify/redirect",
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_spotify", profile);
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
-          name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
+          name: profile.displayName,
+          email: profile._json.email,
+          location: profile.country,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {
@@ -215,17 +213,17 @@ passport.use(
       callbackURL: "/auth/amazon/redirect",
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_amazon", profile);
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
           name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
+          email: profile._json.email,
+          location: profile._json.postal_code,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {
@@ -245,17 +243,17 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     async (token, tokenSecret, profile, done) => {
-      console.log("PROFILE_google", profile);
       const currentUser = await User.findOne({
-        providerId: profile._json.id_str,
+        providerId: profile.id,
       });
 
       if (!currentUser) {
         const newUser = await new User({
           name: profile._json.name,
-          authByProvider: profile.provider,
-          providerId: profile._json.id_str,
-          screenName: profile._json.screen_name,
+          email: profile._json.email,
+          image: profile._json.picture,
+          provider: profile.provider,
+          providerId: profile.id,
           profile,
         }).save();
         if (newUser) {

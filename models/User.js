@@ -1,10 +1,13 @@
 const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
-  name: String,
-  authByProvider: String,
-  screenName: String,
-  providerId: String,
+  name: { type: String, default: "not provided" },
+  email: { type: String, default: "not provided" },
+  image: { type: String, default: "not provided" },
+  birthday: { type: String, default: "not provided" },
+  location: { type: String, default: "not provided" },
+  provider: { type: String, default: "not provided" },
+  providerId: { type: String },
   profile: Object,
 });
 
