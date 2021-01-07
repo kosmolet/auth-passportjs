@@ -8,14 +8,6 @@ import TwitterIcon from "../assets/images/twitter.png";
 
 export const data = [
   {
-    img: AmazonIcon,
-    name: "amazon",
-    href: "auth/amazon",
-    alt: "amazon-icon",
-    color: "#F9AE31",
-    txt: "Login with Amazon",
-  },
-  {
     img: FacebookIcon,
     name: "facebook",
     href: "auth/facebook",
@@ -30,6 +22,14 @@ export const data = [
     alt: "github-icon",
     color: "#333333",
     txt: "Login with Github",
+  },
+  {
+    img: TwitterIcon,
+    name: "twitter",
+    href: "auth/twitter",
+    alt: "twitter-icon",
+    color: "#1da1f2",
+    txt: "Login with Twitter",
   },
   {
     img: GoogleIcon,
@@ -60,11 +60,11 @@ export const data = [
     txt: "Login with Spotify",
   },
   {
-    img: TwitterIcon,
-    name: "twitter",
-    href: "auth/twitter",
-    alt: "twitter-icon",
-    color: "#1da1f2",
-    txt: "Login with Twitter",
+    img: AmazonIcon,
+    name: "amazon",
+    href: "auth/amazon",
+    alt: "amazon-icon",
+    color: "#F9AE31",
+    txt: "Login with Amazon",
   },
 ];

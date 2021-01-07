@@ -6,18 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #292727;
-  background-color: #ebe5e5;
-}
-
-.home-page {
-  margin: 0 auto;
-  text-align: "center";
+  background-color: #faecec;
 }
 
 .home-content {
-  font-weight: 400;
-  font-size: 35px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +20,8 @@ body {
 .buttons {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  width: 70vw;
+  max-width: 400px;
   justify-content: center;
   align-content: center;
 }
@@ -112,11 +105,35 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: 100vw;
+  margin-bottom: 50px;
 }
 
 .profile-page-title {
   font-size: 35px;
 }
+.data-tags {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex: 1 1;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 5px 10px;
+  margin: 5px 5px 20px 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.tag:hover,
+.selected {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
 .user-data-wr {
   width: 60vw;
   margin: 0 auto;
@@ -129,11 +146,6 @@ body {
   padding: 3px;
 }
 
-.buttons-small {
-  padding-left: 8px;
-  padding-top: 3px;
-}
-
 .content {
   background-color: #e0d9d9;
   padding: 10px;
@@ -144,23 +156,4 @@ body {
 }
 .content pre {
   white-space: pre-wrap;
-}
-.data-tags {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-
-.tag {
-  color: black;
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 5px 5px 20px 5px;
-}
-
-.tag:hover,
-.selected {
-  background-color: black;
-  color: white;
 }

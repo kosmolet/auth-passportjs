@@ -9,35 +9,30 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const MenuBar = (props) => {
-  const { authenticated, handleNotAuthenticated } = props;
-  const handleSignIn = () => {
-    window.open("http://localhost:5070/auth/twitter", "_self");
-  };
+  const { handleNotAuthenticated } = props;
+  const userData = useContext(UserProvider.context);
+  // const handleSignIn = () => {
+  //   window.open("http://localhost:5070/auth/twitter", "_self");
+  // };
 
   const handleLogout = () => {
     window.open("http://localhost:5070/auth/logout", "_self");
     handleNotAuthenticated();
   };
 
-  // const loginType = !_.isEmpty(userData)
-  //   ? _.find(data, (d) => d.name === userData.provider)
-  //   : {};
-  // const handleLogout = async () => {
-  //   try {
-  //     await fetch(`http://localhost:5070/auth/logout`);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const loginType = !_.isEmpty(userData.user)
+    ? _.find(data, (d) => d.name === userData.user.provider)
+    : {};
+
   return (
     <div className="menu-bar">
       <Link className="btn menu-btn" to="/" title="Home">
         <HomeIcon />
       </Link>
-
-      {authenticated ? (
+      {console.log(userData, "user")}
+      {userData.authenticated ? (
         <div>
-          {/* <Link
+          <Link
             className="btn menu-btn"
             to="/profile"
             title={`${loginType.name} data`}
@@ -53,10 +48,12 @@ const MenuBar = (props) => {
                 style={{ position: "absolute", top: 17, paddingLeft: 5 }}
               />
             </div>
-          </Link> */}
+          </Link>
           <Link className="btn menu-btn" to="/profile" title="Profile">
             <PermIdentityIcon />
+            {`  Hi ${userData.user.name} !`}
           </Link>
+
           <Link
             to={`/`}
             className="btn menu-btn"
@@ -70,6 +67,7 @@ const MenuBar = (props) => {
       ) : (
         <div>
           <Link className="btn menu-btn disabled" to="/">
+            Login with Passport Js
             <img
               src={PassportLogo}
               alt="passport.js logo"
@@ -77,7 +75,7 @@ const MenuBar = (props) => {
             />
           </Link>
 
-          <button onClick={handleSignIn}>Login</button>
+          {/* <button onClick={handleSignIn}>Login</button> */}
         </div>
       )}
     </div>

@@ -1,18 +1,18 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import UserProvider from "../store/UserProvider";
 import UserData from "../components/UserData";
-
 import DataTags from "../components/DataTags";
 import _ from "lodash";
 
 const Profile = () => {
   const [selected, setSelected] = useState("All");
   const userData = useContext(UserProvider.context);
-  const text = _.isEmpty(userData)
-    ? "Login to see the user data "
+  const text = _.isEmpty(userData.user)
+    ? "Login to see user data "
     : "Explore User Info";
-  const options = Object.keys(userData).filter((key) => {
-    return userData[key] !== null;
+
+  const options = Object.keys(userData.user).filter((key) => {
+    return userData.user[key] !== null;
   });
 
   return (
@@ -27,9 +27,7 @@ const Profile = () => {
         selected={selected}
       />
 
-      <UserData userData={userData} selected={selected} />
-
-      <div style={{ marginBottom: 20 }} />
+      <UserData userData={userData.user} selected={selected} />
     </div>
   );
 };
